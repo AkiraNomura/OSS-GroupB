@@ -54,12 +54,10 @@ int elMain("�Ղ�Ղ�");
 	{
 		elSetScreen(MAIN_SCREEN,MainScreen());
 	}
->>>>>>> master
 	elExitMain();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-<<<<<<< HEAD
 //	ウインドウ生成関数
 
 void elCreate(void)
@@ -82,7 +80,6 @@ void elCreate(void)
 	// �t�B�[���h���N���A
 	for (int y = 0; y < 15; y++) {
 		for (int x = 0; x < 8; x++) {
->>>>>>> master
 			if (x == 0 || x == 7 || y == 14) field[y][x] = 5;
 			else field[y][x] = -1;
 		}
@@ -91,7 +88,6 @@ void elCreate(void)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-<<<<<<< HEAD
 //	キーボード関数
 
 // 　何かキー入力があると、呼び出される関数。
@@ -117,12 +113,10 @@ void elKeyboard(void)
 		elDraw::Exit();
 		break;
 	}
->>>>>>> master
 	elExitKeyboard();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-<<<<<<< HEAD
 //	イベント関数
 
 //Windowsでのイベントを受け取ると、呼び出される関数。
@@ -135,12 +129,10 @@ long elEvent(void)
 
 long elEvent(void)
 {
->>>>>>> master
 	elExitEvent();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-<<<<<<< HEAD
 //	メイン画面
 
 // ぷよ結合チェック関数（再帰）
@@ -168,14 +160,12 @@ int CheckCombine(int x, int y, int pno, int cno)
 	ret += CheckCombine(x + 1, y, pno, cno);				// �E
 	ret += CheckCombine(x, y + 1, pno, cno);				// ��
 	ret += CheckCombine(x - 1, y, pno, cno);				// ��
->>>>>>> master
 	return ret;
 }
 
 void MainScreen(void)
 {
 	int i, x, y;
-<<<<<<< HEAD
 	int kx1, ky1, kx2, ky2;			// 仮の座標
 	bool flag;						// 汎用フラグ
 	static int pnext1, pnext2;		// ネクストぷよ番号（０～４）
@@ -240,14 +230,12 @@ void MainScreen(void)
 		px1 = 3; py1 = 1; px2 = 3; py2 = 0;
 		pno1 = pnext1; pno2 = pnext2;
 		pnext1 = rand() % 5; pnext2 = rand() % 5;
->>>>>>> master
 		downCount = timeGetTime();
 		if (downTime > 100) downTime -= 10;
 		else downTime--;
 		if (downTime < 10) downTime = 10;
 		status = NORMAL;
 		break;
-<<<<<<< HEAD
 	// 通常
 	case NORMAL:
 		kx1 = px1; ky1 = py1;
@@ -321,21 +309,17 @@ void MainScreen(void)
 		} else if (nowTime - downCount > downTime) {
 			ky1++; ky2++; flag = true; downCount = nowTime;
 		}
->>>>>>> master
 		if (field[ky1][kx1] == -1 && field[ky2][kx2] == -1) {
 			px1 = kx1; py1 = ky1;
 			px2 = kx2; py2 = ky2;
 		} else if (flag) {
-<<<<<<< HEAD
 	//NEXTぷよ落下準備
 =======
->>>>>>> master
 			field[py1][px1] = pno1;
 			field[py2][px2] = pno2;
 			status = FALL;
 		}
 		break;
-<<<<<<< HEAD
 	// ぷよ落下
 	case FALL:
 		Sleep(50);
@@ -352,7 +336,6 @@ void MainScreen(void)
 		flag = false;
 		for (y = 12; y >= 0; y--) {
 			for (x = 1; x < 7; x++) {
->>>>>>> master
 				if (field[y][x] != -1 && field[y + 1][x] == -1) {
 					field[y + 1][x] = field[y][x];
 					field[y][x] = -1;
@@ -360,7 +343,6 @@ void MainScreen(void)
 				}
 			}
 		}
-<<<<<<< HEAD
 　　　　//設定した色数が重なると「ぷよ消し前」の作業に移る。
 		if (flag == false){     
 　　　　　　　　status = ERASE1;
@@ -375,13 +357,11 @@ void MainScreen(void)
 	// �Ղ�����O
 	case ERASE1:
 		// �Ղ挋���`�F�b�N
->>>>>>> master
 		flag = false;
 		for (y = 0; y < 15; y++) for (x = 0; x < 8; x++) cmb[y][x] = 0;
 		for (i = 0; i < 30; i++) elist[i] = false;
 		for (y = 13, i = 0; y >= 0; y--) {
 			for (x = 1; x < 7; x++) {
-<<<<<<< HEAD
 		//同じぷよの結合具合（？）
 				if (cmb[y][x] == 0 && field[y][x] != -1) {
 					i++;
@@ -391,7 +371,6 @@ void MainScreen(void)
 				if (cmb[y][x] == 0 && field[y][x] != -1) {
 					i++;
 					int ret = CheckCombine(x, y, field[y][x], i);
->>>>>>> master
 					if (ret >= 4) {
 						flag = true;
 						elist[i] = true;
@@ -401,17 +380,14 @@ void MainScreen(void)
 			}
 		}
 		if (flag) {
-<<<<<<< HEAD
 			// 結合ぷよがある場合は消したぷよと場所の入れ替え
 =======
 			// �����Ղ悪����ꍇ�͏����Ղ�Ɠ���ւ�
->>>>>>> master
 			for (y = 13; y >= 0; y--) {
 				for (x = 1; x < 7; x++) {
 					if (elist[cmb[y][x]]) field[y][x] = 5;
 				}
 			}
-<<<<<<< HEAD
 			status = ERASE2;　　
 		} else {
 			// 結合ぷよがない場合はゲームオーバーチェックして次へ
@@ -419,7 +395,6 @@ void MainScreen(void)
 			status = ERASE2;
 		} else {
 			// �����Ղ悪�Ȃ��ꍇ�̓Q�[���I�[�o�[�`�F�b�N���Ď���
->>>>>>> master
 			for (y = 0; y < 2; y++) {
 				for (x = 1; x < 7; x++) {
 					if (field[y][x] != -1) overFlag = true;
@@ -428,7 +403,6 @@ void MainScreen(void)
 			status = NEXT;
 		}
 		break;
-<<<<<<< HEAD
 	// ぷよ消し
 	case ERASE2:
 		Sleep(500);　//一時的にフリーズ反応
@@ -437,7 +411,6 @@ void MainScreen(void)
 	// �Ղ����
 	case ERASE2:
 		Sleep(500);
->>>>>>> master
 		for (y = 13; y >= 0; y--) {
 			for (x = 1; x < 7; x++) {
 				if (field[y][x] == 5) field[y][x] = -1;
@@ -446,7 +419,6 @@ void MainScreen(void)
 		status = FALL;
 		break;
 	}
-<<<<<<< HEAD
 	// 画面表示　（ラインは白、右はねずみ色）
 	elDraw::Box(192, 0, 256, 448, RGB(150, 150, 150), RGB(150, 150, 150), 0);
 	elDraw::Line(0, 64, 192, 64, RGB(255, 255, 255), 1);
@@ -455,7 +427,6 @@ void MainScreen(void)
 	// ��ʕ\��
 	elDraw::Box(192, 0, 256, 448, RGB(150, 150, 150), RGB(150, 150, 150), 0);
 	elDraw::Line(0, 64, 192, 64, RGB(255, 255, 255), 1);
->>>>>>> master
 	SHOW(210, 16, "SCORE");
 	SHOW2(210, 32, "%d", score);
 	SHOW(212, 128, "NEXT");
@@ -467,18 +438,15 @@ void MainScreen(void)
 			}
 		}
 	}
-<<<<<<< HEAD
 	// 現在のぷよ表示 (ネクスト同様に色は赤・緑・青・赤・ピンク。4つ重なったらシルバー）
 =======
 	// ���݂̂Ղ�\��
->>>>>>> master
 	if (status == NORMAL) {
 		elDraw::Layer((px1 - 1) * 32, py1 * 32,
 			puyo, pno1 * 32, 0, pno1 * 32 + 32, 32);
 		elDraw::Layer((px2 - 1) * 32, py2 * 32,
 			puyo, pno2 * 32, 0, pno2 * 32 + 32, 32);
 	}
-<<<<<<< HEAD
 	// ネクストぷよ表示
 	elDraw::Layer(208, 144, puyo, pnext2 * 32, 0, pnext2 * 32 + 32, 32);
 	elDraw::Layer(208, 144 + 32, puyo, pnext1 * 32, 0, pnext1 * 32 + 32, 32);
@@ -494,7 +462,6 @@ void MainScreen(void)
 	// �Q�[���I�[�o�[����
 	if (overFlag) {
 		elSystem::Message("�Q�[���I�[�o�[");
->>>>>>> master
 		elDraw::Exit();
 	}
 }
