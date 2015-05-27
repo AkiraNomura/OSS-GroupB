@@ -1,5 +1,4 @@
 ///////////////////////////////////////////////////////////////////////////////
-<<<<<<< HEAD
 //	ã·ã‚ˆã·ã‚ˆ
 
 include "el.h"
@@ -30,36 +29,10 @@ int elMain("ã·ã‚ˆã·ã‚ˆ");
 		elSetScreen(MAIN_SCREEN,MainScreen());
 	}	
 	//ãƒ¡ã‚¤ãƒ³é–¢æ•°çµ‚äº†ã§è‡ªå‹•çš„ã«çµ‚äº†å‡¦ç†ã€‚
-=======
-//	‚Õ‚æ‚Õ‚æ
-
-#include "el.h"
-
-#define MAIN_SCREEN 1
-
-void MainScreen(void);
-
-DDOBJ puyo;				// ‚Õ‚æ‚Ìƒrƒbƒgƒ}ƒbƒv
-int field[15][8];		// ‰æ–Êƒf[ƒ^
-int cmb[15][8];			// Œ‹‡ƒ`ƒFƒbƒN—p
-bool elist[30];			// Á‚·ƒŠƒXƒg
-
-///////////////////////////////////////////////////////////////////////////////
-//	ƒƒCƒ“ŠÖ”
-
-int elMain("‚Õ‚æ‚Õ‚æ");
-{
-	elWindow(256, 448, FALSE);
-	elLoop()
-	{
-		elSetScreen(MAIN_SCREEN,MainScreen());
-	}
->>>>>>> master
 	elExitMain();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-<<<<<<< HEAD
 //	ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ç”Ÿæˆé–¢æ•°
 
 void elCreate(void)
@@ -71,18 +44,6 @@ void elCreate(void)
 	for (int y = 0; y < 15; y++) {
 		for (int x = 0; x < 8; x++) {
     //ã·ã‚ˆãŒå…¨éƒ¨åŸ‹ã¾ã‚‹ã¾ã§ã®ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦å‹•ä½œ
-=======
-//	ƒEƒCƒ“ƒhƒE¶¬ŠÖ”
-
-void elCreate(void)
-{
-	elDraw::Screen(256, 448);
-	// ‚Õ‚æ‰æ‘œ“Ç‚Ýž‚Ý
-	puyo = elDraw::LoadObject("puyo.bmp");
-	// ƒtƒB[ƒ‹ƒh‚ðƒNƒŠƒA
-	for (int y = 0; y < 15; y++) {
-		for (int x = 0; x < 8; x++) {
->>>>>>> master
 			if (x == 0 || x == 7 || y == 14) field[y][x] = 5;
 			else field[y][x] = -1;
 		}
@@ -91,7 +52,6 @@ void elCreate(void)
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-<<<<<<< HEAD
 //	ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰é–¢æ•°
 
 // ã€€ä½•ã‹ã‚­ãƒ¼å…¥åŠ›ãŒã‚ã‚‹ã¨ã€å‘¼ã³å‡ºã•ã‚Œã‚‹é–¢æ•°ã€‚
@@ -107,22 +67,10 @@ case VK_ESCAPE:
 		break;
 	}
   //ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰é–¢æ•°çµ‚äº†ã€‚
-=======
-//	ƒL[ƒ{[ƒhŠÖ”
-
-void elKeyboard(void)
-{
-	case VK_ESCAPE:
-	{
-		elDraw::Exit();
-		break;
-	}
->>>>>>> master
 	elExitKeyboard();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-<<<<<<< HEAD
 //	ã‚¤ãƒ™ãƒ³ãƒˆé–¢æ•°
 
 //Windowsã§ã®ã‚¤ãƒ™ãƒ³ãƒˆã‚’å—ã‘å–ã‚‹ã¨ã€å‘¼ã³å‡ºã•ã‚Œã‚‹é–¢æ•°ã€‚
@@ -130,17 +78,10 @@ void elKeyboard(void)
 long elEvent(void)
 {
 //ã‚¤ãƒ™ãƒ³ãƒˆçµ‚äº†ã€‚
-=======
-//	ƒCƒxƒ“ƒgŠÖ”
-
-long elEvent(void)
-{
->>>>>>> master
 	elExitEvent();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-<<<<<<< HEAD
 //	ãƒ¡ã‚¤ãƒ³ç”»é¢
 
 // ã·ã‚ˆçµåˆãƒã‚§ãƒƒã‚¯é–¢æ•°ï¼ˆå†å¸°ï¼‰
@@ -154,28 +95,12 @@ int CheckCombine(int x, int y, int pno, int cno)
 	ret += CheckCombine(x + 1, y, pno, cno);		         // å³
 	ret += CheckCombine(x, y + 1, pno, cno);			// ä¸‹
 	ret += CheckCombine(x - 1, y, pno, cno);			// å·¦
-=======
-//	ƒƒCƒ“‰æ–Ê
-
-// ‚Õ‚æŒ‹‡ƒ`ƒFƒbƒNŠÖ”iÄ‹Aj
-// ˆø” x, y:’²‚×‚é‚Õ‚æÀ•W pno:‚Õ‚æ”Ô† cno:Œ‹‡”Ô†
-int CheckCombine(int x, int y, int pno, int cno)
-{
-	if (field[y][x] != pno || cmb[y][x] != 0) return 0;
-	int ret = 1;
-	cmb[y][x] = cno;
-	if (y > 0) ret += CheckCombine(x, y - 1, pno, cno);		// ã
-	ret += CheckCombine(x + 1, y, pno, cno);				// ‰E
-	ret += CheckCombine(x, y + 1, pno, cno);				// ‰º
-	ret += CheckCombine(x - 1, y, pno, cno);				// ¶
->>>>>>> master
 	return ret;
 }
 
 void MainScreen(void)
 {
 	int i, x, y;
-<<<<<<< HEAD
 	int kx1, ky1, kx2, ky2;			// ä»®ã®åº§æ¨™
 	bool flag;						// æ±Žç”¨ãƒ•ãƒ©ã‚°
 	static int pnext1, pnext2;		// ãƒã‚¯ã‚¹ãƒˆã·ã‚ˆç•ªå·ï¼ˆï¼ï½žï¼”ï¼‰
@@ -209,45 +134,12 @@ void MainScreen(void)
 		pno1 = pnext1; pno2 = pnext2;
 		pnext1 = rand() % 5; pnext2 = rand() % 5;
 	//ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã«è½ã¡ãŸã·ã‚ˆãŒä¸‹ã«ã¤ã„ãŸæ™‚ã«æ¬¡ã®ã·ã‚ˆãŒè½ä¸‹ã‚’å§‹ã‚ã‚‹ã€‚
-=======
-	int kx1, ky1, kx2, ky2;			// ‰¼‚ÌÀ•W
-	bool flag;						// ”Ä—pƒtƒ‰ƒO
-	static int pnext1, pnext2;		// ƒlƒNƒXƒg‚Õ‚æ”Ô†i‚O`‚Sj
-	static int pno1, pno2;			// Œ»Ý‚Ì‚Õ‚æ”Ô†i‚O`‚Sj
-	static int px1, py1, px2, py2;	// ‚Õ‚æ‚Ì‚wA‚xÀ•W
-	static int keyLeft = FREE_KEY;	// ¶ƒL[
-	static int keyRight = FREE_KEY;	// ‰EƒL[
-	static int keyDown = FREE_KEY;	// ‰ºƒL[
-	static int keySpace = FREE_KEY;	// ƒXƒy[ƒXƒL[
-	static bool overFlag = false;	// ƒQ[ƒ€ƒI[ƒo[ƒtƒ‰ƒO
-	static int score = 0;			// “¾“_
-	static DWORD rpt = 0;			// ƒL[ƒŠƒs[ƒgŽžŠÔ
-	static DWORD downTime = 1000;	// 1ƒuƒƒbƒN—Ž‰º‚·‚éŽžŠÔ(ms)
-	static DWORD downCount;			// —Ž‰ºŽžŠÔ‚Ü‚Å‚Ì—P—\(ms)
-	static enum {					// ó‘Ô
-		NEXT,						// ƒlƒNƒXƒg‚Õ‚æoŒ»
-		NORMAL,						// ’Êí
-		FALL,						// ‚Õ‚æ—Ž‰º
-		ERASE1,						// ‚Õ‚æÁ‚µ‘O
-		ERASE2,						// ‚Õ‚æÁ‚µ
-	} status = NEXT;
-	if (elChangeScreen()) {pnext1 = rand() % 5; pnext2 = rand() % 5;}
-	elDraw::Clear();
-	DWORD nowTime = timeGetTime();
-	switch (status) {
-	// ƒlƒNƒXƒg‚Õ‚æoŒ»
-	case NEXT:
-		px1 = 3; py1 = 1; px2 = 3; py2 = 0;
-		pno1 = pnext1; pno2 = pnext2;
-		pnext1 = rand() % 5; pnext2 = rand() % 5;
->>>>>>> master
 		downCount = timeGetTime();
 		if (downTime > 100) downTime -= 10;
 		else downTime--;
 		if (downTime < 10) downTime = 10;
 		status = NORMAL;
 		break;
-<<<<<<< HEAD
 	// é€šå¸¸
 	case NORMAL:
 		kx1 = px1; ky1 = py1;
@@ -297,45 +189,16 @@ void MainScreen(void)
 			ky1++; ky2++; flag = true; downCount = nowTime;
 		}
 ã€€ã€€ã€€ã€€//ä½•ã‚‚æ“ä½œã—ãªã‘ã‚Œã°ãã®ã¾ã¾è½ã¡ã‚‹ã€‚
-=======
-	// ’Êí
-	case NORMAL:
-		kx1 = px1; ky1 = py1;
-		kx2 = px2; ky2 = py2;
-		elSystem::GetKey(VK_LEFT, &keyLeft);
-		elSystem::GetKey(VK_RIGHT, &keyRight);
-		elSystem::GetKey(VK_DOWN, &keyDown);
-		elSystem::GetKey(VK_SPACE, &keySpace);
-		flag = false;
-		if (keySpace == PUSH_KEY) {
-			if (kx2 > kx1) {kx2 = kx1; ky2 = ky1 + 1;}
-			else if (kx2 < kx1) {kx2 = kx1; ky2 = ky1 - 1;}
-			else if (ky2 > ky1) {ky2 = ky1; kx2 = kx1 - 1;}
-			else {ky2 = ky1; kx2 = kx1 + 1;}
-		} else if (keyDown == PUSH_KEY || keyDown == HOLD_KEY && nowTime - rpt > 10) {
-			ky1++; ky2++; flag = true; rpt = nowTime;
-		} else if (keyLeft == PUSH_KEY || keyLeft == HOLD_KEY && nowTime - rpt > 150) {
-			kx1--; kx2--; rpt = nowTime;
-		} else if (keyRight == PUSH_KEY || keyRight == HOLD_KEY && nowTime - rpt > 150) {
-			kx1++; kx2++; rpt = nowTime;
-		} else if (nowTime - downCount > downTime) {
-			ky1++; ky2++; flag = true; downCount = nowTime;
-		}
->>>>>>> master
 		if (field[ky1][kx1] == -1 && field[ky2][kx2] == -1) {
 			px1 = kx1; py1 = ky1;
 			px2 = kx2; py2 = ky2;
 		} else if (flag) {
-<<<<<<< HEAD
 	//NEXTã·ã‚ˆè½ä¸‹æº–å‚™
-=======
->>>>>>> master
 			field[py1][px1] = pno1;
 			field[py2][px2] = pno2;
 			status = FALL;
 		}
 		break;
-<<<<<<< HEAD
 	// ã·ã‚ˆè½ä¸‹
 	case FALL:
 		Sleep(50);
@@ -345,14 +208,6 @@ void MainScreen(void)
 	//å·¦ç«¯ã‹ã‚‰å³ç«¯ã¾ã§ã®æ“ä½œ
 			for (x = 1; x < 7; x++) {
         //ã·ã‚ˆç©ã¿ä¸Šã’ãŸå ´æ‰€ã‚’ä¸€ç•ªä¸‹ã¨ã—ã¦å†ã³è½ä¸‹
-=======
-	// ‚Õ‚æ—Ž‰º
-	case FALL:
-		Sleep(50);
-		flag = false;
-		for (y = 12; y >= 0; y--) {
-			for (x = 1; x < 7; x++) {
->>>>>>> master
 				if (field[y][x] != -1 && field[y + 1][x] == -1) {
 					field[y + 1][x] = field[y][x];
 					field[y][x] = -1;
@@ -360,7 +215,6 @@ void MainScreen(void)
 				}
 			}
 		}
-<<<<<<< HEAD
 ã€€ã€€ã€€ã€€//è¨­å®šã—ãŸè‰²æ•°ãŒé‡ãªã‚‹ã¨ã€Œã·ã‚ˆæ¶ˆã—å‰ã€ã®ä½œæ¥­ã«ç§»ã‚‹ã€‚
 		if (flag == false){     
 ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€status = ERASE1;
@@ -369,29 +223,16 @@ void MainScreen(void)
 	// ã·ã‚ˆæ¶ˆã—å‰
 	case ERASE1:
 		// ã·ã‚ˆçµåˆãƒã‚§ãƒƒã‚¯
-=======
-		if (flag == false) status = ERASE1;
-		break;
-	// ‚Õ‚æÁ‚µ‘O
-	case ERASE1:
-		// ‚Õ‚æŒ‹‡ƒ`ƒFƒbƒN
->>>>>>> master
 		flag = false;
 		for (y = 0; y < 15; y++) for (x = 0; x < 8; x++) cmb[y][x] = 0;
 		for (i = 0; i < 30; i++) elist[i] = false;
 		for (y = 13, i = 0; y >= 0; y--) {
 			for (x = 1; x < 7; x++) {
-<<<<<<< HEAD
 		//åŒã˜ã·ã‚ˆã®çµåˆå…·åˆï¼ˆï¼Ÿï¼‰
 				if (cmb[y][x] == 0 && field[y][x] != -1) {
 					i++;
 					int ret = CheckCombine(x, y, field[y][x], i);
 	                               //åŒã˜ã·ã‚ˆãŒï¼”ã¤ãã‚ã†ã¨æ¶ˆãˆã¦ã‚¹ã‚³ã‚¢ã‚¢ãƒƒãƒ—
-=======
-				if (cmb[y][x] == 0 && field[y][x] != -1) {
-					i++;
-					int ret = CheckCombine(x, y, field[y][x], i);
->>>>>>> master
 					if (ret >= 4) {
 						flag = true;
 						elist[i] = true;
@@ -401,25 +242,15 @@ void MainScreen(void)
 			}
 		}
 		if (flag) {
-<<<<<<< HEAD
 			// çµåˆã·ã‚ˆãŒã‚ã‚‹å ´åˆã¯æ¶ˆã—ãŸã·ã‚ˆã¨å ´æ‰€ã®å…¥ã‚Œæ›¿ãˆ
-=======
-			// Œ‹‡‚Õ‚æ‚ª‚ ‚éê‡‚ÍÁ‚µ‚Õ‚æ‚Æ“ü‚ê‘Ö‚¦
->>>>>>> master
 			for (y = 13; y >= 0; y--) {
 				for (x = 1; x < 7; x++) {
 					if (elist[cmb[y][x]]) field[y][x] = 5;
 				}
 			}
-<<<<<<< HEAD
 			status = ERASE2;ã€€ã€€
 		} else {
 			// çµåˆã·ã‚ˆãŒãªã„å ´åˆã¯ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼ãƒã‚§ãƒƒã‚¯ã—ã¦æ¬¡ã¸
-=======
-			status = ERASE2;
-		} else {
-			// Œ‹‡‚Õ‚æ‚ª‚È‚¢ê‡‚ÍƒQ[ƒ€ƒI[ƒo[ƒ`ƒFƒbƒN‚µ‚ÄŽŸ‚Ö
->>>>>>> master
 			for (y = 0; y < 2; y++) {
 				for (x = 1; x < 7; x++) {
 					if (field[y][x] != -1) overFlag = true;
@@ -428,16 +259,10 @@ void MainScreen(void)
 			status = NEXT;
 		}
 		break;
-<<<<<<< HEAD
 	// ã·ã‚ˆæ¶ˆã—
 	case ERASE2:
 		Sleep(500);ã€€//ä¸€æ™‚çš„ã«ãƒ•ãƒªãƒ¼ã‚ºåå¿œ
 ã€€ã€€ã€€ã€€//ãªããªã£ã¦è½ã¡ãŸå ´æ‰€ã¯æ¶ˆãˆã‚‹å‰ã®åº§æ¨™ã‚ˆã‚Šã·ã‚ˆãŒä¸‹ã«ãŠã¡ã‚‹ã€‚
-=======
-	// ‚Õ‚æÁ‚µ
-	case ERASE2:
-		Sleep(500);
->>>>>>> master
 		for (y = 13; y >= 0; y--) {
 			for (x = 1; x < 7; x++) {
 				if (field[y][x] == 5) field[y][x] = -1;
@@ -446,16 +271,10 @@ void MainScreen(void)
 		status = FALL;
 		break;
 	}
-<<<<<<< HEAD
 	// ç”»é¢è¡¨ç¤ºã€€ï¼ˆãƒ©ã‚¤ãƒ³ã¯ç™½ã€å³ã¯ã­ãšã¿è‰²ï¼‰
 	elDraw::Box(192, 0, 256, 448, RGB(150, 150, 150), RGB(150, 150, 150), 0);
 	elDraw::Line(0, 64, 192, 64, RGB(255, 255, 255), 1);
 	//ã‚¹ã‚³ã‚¢è¡¨ç¤º(é’è‰²ï¼‰
-=======
-	// ‰æ–Ê•\Ž¦
-	elDraw::Box(192, 0, 256, 448, RGB(150, 150, 150), RGB(150, 150, 150), 0);
-	elDraw::Line(0, 64, 192, 64, RGB(255, 255, 255), 1);
->>>>>>> master
 	SHOW(210, 16, "SCORE");
 	SHOW2(210, 32, "%d", score);
 	SHOW(212, 128, "NEXT");
@@ -467,18 +286,13 @@ void MainScreen(void)
 			}
 		}
 	}
-<<<<<<< HEAD
 	// ç¾åœ¨ã®ã·ã‚ˆè¡¨ç¤º (ãƒã‚¯ã‚¹ãƒˆåŒæ§˜ã«è‰²ã¯èµ¤ãƒ»ç·‘ãƒ»é’ãƒ»èµ¤ãƒ»ãƒ”ãƒ³ã‚¯ã€‚4ã¤é‡ãªã£ãŸã‚‰ã‚·ãƒ«ãƒãƒ¼ï¼‰
-=======
-	// Œ»Ý‚Ì‚Õ‚æ•\Ž¦
->>>>>>> master
 	if (status == NORMAL) {
 		elDraw::Layer((px1 - 1) * 32, py1 * 32,
 			puyo, pno1 * 32, 0, pno1 * 32 + 32, 32);
 		elDraw::Layer((px2 - 1) * 32, py2 * 32,
 			puyo, pno2 * 32, 0, pno2 * 32 + 32, 32);
 	}
-<<<<<<< HEAD
 	// ãƒã‚¯ã‚¹ãƒˆã·ã‚ˆè¡¨ç¤º
 	elDraw::Layer(208, 144, puyo, pnext2 * 32, 0, pnext2 * 32 + 32, 32);
 	elDraw::Layer(208, 144 + 32, puyo, pnext1 * 32, 0, pnext1 * 32 + 32, 32);
@@ -486,15 +300,6 @@ void MainScreen(void)
 	// ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼å‡¦ç†ã€‚å‡¦ç†å¾Œã€ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚’é–‰ã˜ã‚‹
 	if (overFlag) {
 		elSystem::Message("ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼");
-=======
-	// ƒlƒNƒXƒg‚Õ‚æ•\Ž¦
-	elDraw::Layer(208, 144, puyo, pnext2 * 32, 0, pnext2 * 32 + 32, 32);
-	elDraw::Layer(208, 144 + 32, puyo, pnext1 * 32, 0, pnext1 * 32 + 32, 32);
-	elDraw::Refresh();
-	// ƒQ[ƒ€ƒI[ƒo[ˆ—
-	if (overFlag) {
-		elSystem::Message("ƒQ[ƒ€ƒI[ƒo[");
->>>>>>> master
 		elDraw::Exit();
 	}
 }
