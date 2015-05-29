@@ -140,7 +140,7 @@ void MainScreen(void)
 		if (downTime < 10) downTime = 10;
 		status = NORMAL;
 		break;
-	// 通常にぷよが落下するとき（林）
+	// 通常にぷよが落下するとき（林
 	case NORMAL:
 		kx1 = px1; ky1 = py1;
 		kx2 = px2; ky2 = py2;    //仮の座標にぷよの座標を入れる
