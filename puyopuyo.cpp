@@ -120,44 +120,74 @@ void MainScreen(void)
 		if (downTime < 10) downTime = 10;
 		status = NORMAL;
 		break;
-	// 通常
+	// 通常にぷよが落下するとき（林）
 	case NORMAL:
 		kx1 = px1; ky1 = py1;
-		kx2 = px2; ky2 = py2;
-		elSystem::GetKey(VK_LEFT, &keyLeft);
-		elSystem::GetKey(VK_RIGHT, &keyRight);
-		elSystem::GetKey(VK_DOWN, &keyDown);
-		elSystem::GetKey(VK_SPACE, &keySpace);
-		flag = false;
+		kx2 = px2; ky2 = py2;    //仮の座標にぷよの座標を入れる
+		elSystem::GetKey(VK_LEFT, &keyLeft);    //左操作
+		elSystem::GetKey(VK_RIGHT, &keyRight);　//右操作
+		elSystem::GetKey(VK_DOWN, &keyDown);　　//落下操作
+	　	elSystem::GetKey(VK_SPACE, &keySpace);　//回転操作
+		flag = false;    //強制落下状態ではない。フラグが偽
+　　　//space操作でぷよを回転させる
 		if (keySpace == PUSH_KEY) {
-			if (kx2 > kx1) {kx2 = kx1; ky2 = ky1 + 1;}
-			else if (kx2 < kx1) {kx2 = kx1; ky2 = ky1 - 1;}
-			else if (ky2 > ky1) {ky2 = ky1; kx2 = kx1 - 1;}
-			else {ky2 = ky1; kx2 = kx1 + 1;}
-		} else if (keyDown == PUSH_KEY || keyDown == HOLD_KEY && nowTime - rpt > 10) {
-			ky1++; ky2++; flag = true; rpt = nowTime;
-		} else if (keyLeft == PUSH_KEY || keyLeft == HOLD_KEY && nowTime - rpt > 150) {
+　　　//右回転でうしろのぷよが今の位置から右にずれる
+			if (kx2 > kx1) {  //　
+　　　　　　　　　　kx2 = kx1; 
+		ky2 = ky1 + 1;
+　　　　　　　　　　　}
+	//右回転でうしろのぷよが今の位置から左後ろにまわった
+			else if (kx2 < kx1) {　　　　
+	　kx2 = kx1; 
+　　　　　ky2 = ky1 - 1;
+	}
+    //右回転でうしろのぷよが前のぷよの下にまわった
+			else if (ky2 > ky1) {
+	ky2 = ky1; 
+	kx2 = kx1 - 1;
+	}
+	//元の位置に戻る
+			else {
+	ky2 = ky1; 
+	kx2 = kx1 + 1;
+	}
+		} 
+	//下キーでぷよの強制落下をする。10ミリ秒間押し続ければ強制落下をリピートする。キーを離せば元の速度で落ちる。
+	else if (keyDown == PUSH_KEY || keyDown == HOLD_KEY && nowTime - rpt > 10) {
+			ky1++; ky2++; flag = true; rpt = nowTime;    /*強制落下状態のフラグが真になっている*/
+		} 
+　　　　//左キーで左に移動する。150ミリ秒間押し続ければ左移動をリピートする。左キーを離せば元の速度で落ちる。
+	else if (keyLeft == PUSH_KEY || keyLeft == HOLD_KEY && nowTime - rpt > 150) {
 			kx1--; kx2--; rpt = nowTime;
-		} else if (keyRight == PUSH_KEY || keyRight == HOLD_KEY && nowTime - rpt > 150) {
+		} 
+　	//右キーで左に移動する。150ミリ秒間押し続ければ右移動をリピートする。右キーを離せば元の速度で落ちる。
+	else if (keyRight == PUSH_KEY || keyRight == HOLD_KEY && nowTime - rpt > 150) {
 			kx1++; kx2++; rpt = nowTime;
-		} else if (nowTime - downCount > downTime) {
+		} 
+	//どのキーも押されていなければ、ぷよは自動落下することになり、y方向に１つずつ動く。強制落下と同等なのでフラグは真
+	else if (nowTime - downCount > downTime) {
 			ky1++; ky2++; flag = true; downCount = nowTime;
 		}
+　　　　//もしぷよを動かした先が空ならば実際の座標を仮座標に入れる
 		if (field[ky1][kx1] == -1 && field[ky2][kx2] == -1) {
 			px1 = kx1; py1 = ky1;
 			px2 = kx2; py2 = ky2;
+	//ぷよを動かす先が埋まっている場合で落下中の時は状態を落下中にして画面上は現状のぷよ配列にする
 		} else if (flag) {
 			field[py1][px1] = pno1;
 			field[py2][px2] = pno2;
 			status = FALL;
 		}
 		break;
-	// ぷよ落下
+	// ぷよ落下のとき（林）
 	case FALL:
-		Sleep(50);
-		flag = false;
+		Sleep(50);  /*毎回処理を行うと直ぐ下まで落下してしまうので50ミリ秒待つ*/
+		flag = false;   /*どのぷよも落下していない*/
+	//繰り返しによりy軸方向を走査
 		for (y = 12; y >= 0; y--) {
+	//繰り返しによりx軸方向を走査
 			for (x = 1; x < 7; x++) {
+        //その走査して調べた座標にぷよがあり、下が空であれば落下する。ぷよを１つ-1で下げて落下フラグを真にする。
 				if (field[y][x] != -1 && field[y + 1][x] == -1) {
 					field[y + 1][x] = field[y][x];
 					field[y][x] = -1;
@@ -165,8 +195,11 @@ void MainScreen(void)
 				}
 			}
 		}
-		if (flag == false) status = ERASE1;
+　　　　//設定した色数が重なると「ぷよ消し前」の作業に移る。
+		if (flag == false){     
+　　　　　　　　status = ERASE1;
 		break;
+}
 	// ぷよ消し前
 	case ERASE1:
 		// ぷよ結合チェック
