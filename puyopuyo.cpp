@@ -1,21 +1,9 @@
 ///////////////////////////////////////////////////////////////////////////////
-<<<<<<< HEAD
 //	‚Õ‚æ‚Õ‚æ
-=======
-//	ã·ã‚ˆã·ã‚ˆ
 
->>>>>>> 4f70561af625d676e1d35afd7d39c65e571353d3
 include "el.h"
 
-#define MAIN_SCREEN 1
-
-//‰æ–Ê—p‚ÌŠÖ”‚Ìƒvƒƒgƒ^ƒCƒv
-///////////////////////////////////////////////////////////////////////////////
-//	‚Õ‚æ‚Õ‚æ
-
-#include "el.h"
-
-#define MAIN_SCREEN 1
+define MAIN_SCREEN 1
 
 //‰æ–Ê—p‚ÌŠÖ”‚Ìƒvƒƒgƒ^ƒCƒv
 void MainScreen(void);
@@ -152,19 +140,19 @@ void MainScreen(void)
 		if (downTime < 10) downTime = 10;
 		status = NORMAL;
 		break;
-	// ’Êí
+	// ’Êí‚É‚Õ‚æ‚ª—‰º‚·‚é‚Æ‚«i—Ñj
 	case NORMAL:
 		kx1 = px1; ky1 = py1;
-		kx2 = px2; ky2 = py2;
+		kx2 = px2; ky2 = py2;    //‰¼‚ÌÀ•W‚É‚Õ‚æ‚ÌÀ•W‚ğ“ü‚ê‚é
 		elSystem::GetKey(VK_LEFT, &keyLeft);    //¶‘€ì
 		elSystem::GetKey(VK_RIGHT, &keyRight);@//‰E‘€ì
 		elSystem::GetKey(VK_DOWN, &keyDown);@@//—‰º‘€ì
-	@	elSystem::GetKey(VK_SPACE, &keySpace);@//“ü‚ê‘Ö‚¦‘€ì
-		flag = false;
-@@@//space‘€ì‚Å‚Õ‚æ‚Ì“ü‚ê‘Ö‚¦i‰ñ“]j‚ğ‚µ‚Ä‚¢‚é‚Æ‚±‚ë
+	@	elSystem::GetKey(VK_SPACE, &keySpace);@//‰ñ“]‘€ì
+		flag = false;    //‹­§—‰ºó‘Ô‚Å‚Í‚È‚¢Bƒtƒ‰ƒO‚ª‹U
+@@@//space‘€ì‚Å‚Õ‚æ‚ğ‰ñ“]‚³‚¹‚é
 		if (keySpace == PUSH_KEY) {
 @@@//‰E‰ñ“]‚Å‚¤‚µ‚ë‚Ì‚Õ‚æ‚ª¡‚ÌˆÊ’u‚©‚ç‰E‚É‚¸‚ê‚é
-			if (kx2 > kx1) {@
+			if (kx2 > kx1) {  //@
 @@@@@@@@@@kx2 = kx1; 
 		ky2 = ky1 + 1;
 @@@@@@@@@@@}
@@ -184,42 +172,42 @@ void MainScreen(void)
 	kx2 = kx1 + 1;
 	}
 		} 
-	//‰ºƒL[‚Åƒ_ƒEƒ“ƒL[‚Å‚Õ‚æ‚Ì—‰º‚ğ‚·‚éB‰ºƒL[‚ğ—£‚¹‚ÎŒ³‚Ì‘¬“x‚Å—‚¿‚éB
+	//‰ºƒL[‚Å‚Õ‚æ‚Ì‹­§—‰º‚ğ‚·‚éB10ƒ~ƒŠ•bŠÔ‰Ÿ‚µ‘±‚¯‚ê‚Î‹­§—‰º‚ğƒŠƒs[ƒg‚·‚éBƒL[‚ğ—£‚¹‚ÎŒ³‚Ì‘¬“x‚Å—‚¿‚éB
 	else if (keyDown == PUSH_KEY || keyDown == HOLD_KEY && nowTime - rpt > 10) {
-			ky1++; ky2++; flag = true; rpt = nowTime;
+			ky1++; ky2++; flag = true; rpt = nowTime;    /*‹­§—‰ºó‘Ô‚Ìƒtƒ‰ƒO‚ª^‚É‚È‚Á‚Ä‚¢‚é*/
 		} 
-@@@@//¶ƒL[‚Å¶‚ÉˆÚ“®‚·‚éB¶ƒL[‚ğ—£‚¹‚ÎŒ³‚Ì‘¬“x‚Å—‚¿‚éB
+@@@@//¶ƒL[‚Å¶‚ÉˆÚ“®‚·‚éB150ƒ~ƒŠ•bŠÔ‰Ÿ‚µ‘±‚¯‚ê‚Î¶ˆÚ“®‚ğƒŠƒs[ƒg‚·‚éB¶ƒL[‚ğ—£‚¹‚ÎŒ³‚Ì‘¬“x‚Å—‚¿‚éB
 	else if (keyLeft == PUSH_KEY || keyLeft == HOLD_KEY && nowTime - rpt > 150) {
 			kx1--; kx2--; rpt = nowTime;
 		} 
-@	//‰EƒL[‚Å¶‚ÉˆÚ“®‚·‚éB‰EƒL[‚ğ—£‚¹‚ÎŒ³‚Ì‘¬“x‚Å—‚¿‚éB
+@	//‰EƒL[‚Å¶‚ÉˆÚ“®‚·‚éB150ƒ~ƒŠ•bŠÔ‰Ÿ‚µ‘±‚¯‚ê‚Î‰EˆÚ“®‚ğƒŠƒs[ƒg‚·‚éB‰EƒL[‚ğ—£‚¹‚ÎŒ³‚Ì‘¬“x‚Å—‚¿‚éB
 	else if (keyRight == PUSH_KEY || keyRight == HOLD_KEY && nowTime - rpt > 150) {
 			kx1++; kx2++; rpt = nowTime;
 		} 
-	//ˆê”Ô‰º‚Ü‚Å—‚¿‚½‚çÏ‚İã‚°‚½‚Æ‚µ‚Ä‚Ü‚½‚Õ‚æ‚ğ‰Šú‚Ì‘‚³‚Å—‚Æ‚·
+	//‚Ç‚ÌƒL[‚à‰Ÿ‚³‚ê‚Ä‚¢‚È‚¯‚ê‚ÎA‚Õ‚æ‚Í©“®—‰º‚·‚é‚±‚Æ‚É‚È‚èAy•ûŒü‚É‚P‚Â‚¸‚Â“®‚­B‹­§—‰º‚Æ“¯“™‚È‚Ì‚Åƒtƒ‰ƒO‚Í^
 	else if (nowTime - downCount > downTime) {
 			ky1++; ky2++; flag = true; downCount = nowTime;
 		}
-@@@@//‰½‚à‘€ì‚µ‚È‚¯‚ê‚Î‚»‚Ì‚Ü‚Ü—‚¿‚éB
+@@@@//‚à‚µ‚Õ‚æ‚ğ“®‚©‚µ‚½æ‚ª‹ó‚È‚ç‚ÎÀÛ‚ÌÀ•W‚ğ‰¼À•W‚É“ü‚ê‚é
 		if (field[ky1][kx1] == -1 && field[ky2][kx2] == -1) {
 			px1 = kx1; py1 = ky1;
 			px2 = kx2; py2 = ky2;
+	//‚Õ‚æ‚ğ“®‚©‚·æ‚ª–„‚Ü‚Á‚Ä‚¢‚éê‡‚Å—‰º’†‚Ì‚Íó‘Ô‚ğ—‰º’†‚É‚µ‚Ä‰æ–Êã‚ÍŒ»ó‚Ì‚Õ‚æ”z—ñ‚É‚·‚é
 		} else if (flag) {
-	//NEXT‚Õ‚æ—‰º€”õ
 			field[py1][px1] = pno1;
 			field[py2][px2] = pno2;
 			status = FALL;
 		}
 		break;
-	// ‚Õ‚æ—‰º
+	// ‚Õ‚æ—‰º‚Ì‚Æ‚«i—Ñj
 	case FALL:
-		Sleep(50);
-		flag = false;
-	//ŠJn‚©‚çˆê”Ô‰º‚Ü‚Å‚Ì—‰º
+		Sleep(50);  /*–ˆ‰ñˆ—‚ğs‚¤‚Æ’¼‚®‰º‚Ü‚Å—‰º‚µ‚Ä‚µ‚Ü‚¤‚Ì‚Å50ƒ~ƒŠ•b‘Ò‚Â*/
+		flag = false;   /*‚Ç‚Ì‚Õ‚æ‚à—‰º‚µ‚Ä‚¢‚È‚¢*/
+	//ŒJ‚è•Ô‚µ‚É‚æ‚èy²•ûŒü‚ğ‘–¸
 		for (y = 12; y >= 0; y--) {
-	//¶’[‚©‚ç‰E’[‚Ü‚Å‚Ì‘€ì
+	//ŒJ‚è•Ô‚µ‚É‚æ‚èx²•ûŒü‚ğ‘–¸
 			for (x = 1; x < 7; x++) {
-        //‚Õ‚æÏ‚İã‚°‚½êŠ‚ğˆê”Ô‰º‚Æ‚µ‚ÄÄ‚Ñ—‰º
+        //‚»‚Ì‘–¸‚µ‚Ä’²‚×‚½À•W‚É‚Õ‚æ‚ª‚ ‚èA‰º‚ª‹ó‚Å‚ ‚ê‚Î—‰º‚·‚éB‚Õ‚æ‚ğ‚P‚Â-1‚Å‰º‚°‚Ä—‰ºƒtƒ‰ƒO‚ğ^‚É‚·‚éB
 				if (field[y][x] != -1 && field[y + 1][x] == -1) {
 					field[y + 1][x] = field[y][x];
 					field[y][x] = -1;
@@ -315,5 +303,3 @@ void MainScreen(void)
 		elDraw::Exit();
 	}
 }
-
-
