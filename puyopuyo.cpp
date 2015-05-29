@@ -1,9 +1,9 @@
 ///////////////////////////////////////////////////////////////////////////////
 //	ぷよぷよ
 
-include "el.h"
+#include "el.h"
 
-define MAIN_SCREEN 1
+#define MAIN_SCREEN 1
 
 //画面用の関数のプロトタイプ
 void MainScreen(void);
